@@ -10,4 +10,26 @@ auth.set_access_token(
 
 api = tweepy.API(auth)
 
-api.update_status("test")
+
+def make_accounts():
+    accounts = ["Matsudai_koho", "MU_Career",
+                "MU_COOP", "MU_Renkei", "MU_Internation"]
+    return accounts
+
+
+def make_tweets(accounts, count, page):
+    return [api.user_timeline(accounts[i], count=count, page=page) for i in range(len(accounts))]
+
+
+def retweet():
+    accounts = make_accounts()
+    tweets = make_tweets(accounts, 5, 1)
+    for tweet in tweets:
+        for t in tweet:
+            try:
+                api.retweet(t.id)
+            except tweepy.TweepError:
+                print("すでにリツイートしてます")
+
+
+retweet()

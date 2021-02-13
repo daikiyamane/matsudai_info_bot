@@ -21,7 +21,7 @@ def make_tweets(accounts, count, page):
     return [api.user_timeline(accounts[i], count=count, page=page) for i in range(len(accounts))]
 
 
-def retweet():
+def retweet_favorite():
     accounts = make_accounts()
     tweets = make_tweets(accounts, 5, 1)
     for tweet in tweets:
@@ -36,4 +36,4 @@ def retweet():
                 print("すでにいいねしてます")
 
 
-retweet()
+retweet_favorite()

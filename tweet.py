@@ -30,6 +30,10 @@ def retweet():
                 api.retweet(t.id)
             except tweepy.TweepError:
                 print("すでにリツイートしてます")
+            try:
+                api.create_favorite(t.id)
+            except tweepy.TweepError:
+                print("すでにいいねしてます")
 
 
 retweet()

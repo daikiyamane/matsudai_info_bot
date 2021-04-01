@@ -2,6 +2,11 @@
 
 import os
 import tweepy
+import requests
+from bs4 import BeautifulSoup
+import re
+import datetime
+import time
 
 auth = tweepy.OAuthHandler(
     os.environ["CONSUMER_KEY"], os.environ["CONSUMER_SECRET"])
@@ -35,5 +40,68 @@ def retweet_favorite():
             except tweepy.TweepError:
                 print("すでにいいねしてます")
 
+# 休校情報
+
+
+def closed_school():
+    url = "http://mobile.matsuyama-u.jp/mbl/hpg021101.htm?PSS=isdc53vbq2jmiebspka358agib&DATE="
+    res = requests.get(url+f'{datetime.datetime.now().strftime("%Y%m%d")}')
+    if res.status_code == 404:
+        api.update_status("今日の休講情報はありません")
+        quit()
+    soup = BeautifulSoup(res.text, 'html.parser')
+
+    # print(soup.prettify())
+
+    for script in soup(["script", "style", "title", "a"]):
+        script.decompose()
+    # print(soup)
+
+    text = soup.get_text()
+
+    lines = [line.strip() for line in text.splitlines()]
+    # print(lines)
+
+    text = "\n".join(line for line in lines if line)
+    if len(text) >= 140:
+        first = text[:140]
+        second = text[140:]
+        api.update_status(first)
+        api.update_status(second)
+    else:
+        api.update_status(text)
+
+# 補講情報
+
+
+def supplementary_lecture():
+    url = "http://mobile.matsuyama-u.jp/mbl/hpg021201.htm?PSS=mi1vub8dqnmcovg007j7k6tn35&DATE="
+    res = requests.get(url+f'{datetime.datetime.now().strftime("%Y%m%d")}')
+    if res.status_code == 404:
+        api.update_status("今日の補講情報はありません")
+        quit()
+    soup = BeautifulSoup(res.text, 'html.parser')
+
+    # print(soup.prettify())
+
+    for script in soup(["script", "style", "title", "a"]):
+        script.decompose()
+    # print(soup)
+
+    text = soup.get_text()
+
+    lines = [line.strip() for line in text.splitlines()]
+    # print(lines)
+
+    text = "\n".join(line for line in lines if line)
+    if len(text) >= 140:
+        first = text[:140]
+        second = text[140:]
+        api.update_status(first)
+        api.update_status(second)
+    else:
+        api.update_status(text)
+
 
 retweet_favorite()
+closed_school()

@@ -104,4 +104,6 @@ def supplementary_lecture():
 
 
 retweet_favorite()
-closed_school()
+if datetime.time(6, 00) <= datetime.datetime.now().time() and datetime.datetime.now().time() <= datetime.time(7, 0):
+    closed_school()
+    supplementary_lecture()

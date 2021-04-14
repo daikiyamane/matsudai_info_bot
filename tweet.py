@@ -51,18 +51,19 @@ def closed_school():
         quit()
     soup = BeautifulSoup(res.text, 'html.parser')
 
-    # print(soup.prettify())
+    print(soup.prettify())
 
     for script in soup(["script", "style", "title", "a"]):
         script.decompose()
-    # print(soup)
+    print(soup)
 
     text = soup.get_text()
 
     lines = [line.strip() for line in text.splitlines()]
-    # print(lines)
+    print(lines)
 
     text = "\n".join(line for line in lines if line)
+    print(text)
     if len(text) >= 140:
         first = text[:140]
         second = text[140:]

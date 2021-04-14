@@ -44,7 +44,7 @@ def retweet_favorite():
 
 
 def closed_school():
-    url = "http://mobile.matsuyama-u.jp/mbl/hpg021101.htm?PSS=isdc53vbq2jmiebspka358agib&DATE="
+    url = "http://mobile.matsuyama-u.jp/mbl/hpg021101.htm?PSS=h132mjp8dm3iv02ob2c6ckbj5m&DATE="
     res = requests.get(url+f'{datetime.datetime.now().strftime("%Y%m%d")}')
     if res.status_code == 404:
         api.update_status("今日の休講情報はありません")
@@ -75,7 +75,7 @@ def closed_school():
 
 
 def supplementary_lecture():
-    url = "http://mobile.matsuyama-u.jp/mbl/hpg021201.htm?PSS=mi1vub8dqnmcovg007j7k6tn35&DATE="
+    url = "http://mobile.matsuyama-u.jp/mbl/hpg021201.htm?PSS=h132mjp8dm3iv02ob2c6ckbj5m&DATE="
     res = requests.get(url+f'{datetime.datetime.now().strftime("%Y%m%d")}')
     if res.status_code == 404:
         api.update_status("今日の補講情報はありません")
@@ -107,3 +107,5 @@ retweet_favorite()
 if datetime.time(6, 00) <= datetime.datetime.now().time() and datetime.datetime.now().time() <= datetime.time(7, 0):
     closed_school()
     supplementary_lecture()
+closed_school()
+supplementary_lecture()

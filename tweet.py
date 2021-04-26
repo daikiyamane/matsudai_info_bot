@@ -45,7 +45,7 @@ def get_url(url):
     res = requests.get(url)
     soup = BeautifulSoup(res.text, 'html.parser')
     a_tag = soup.find('a')
-    return a_tag.get('href')
+    return "https://mobile.matsuyama-u.jp/mbl/" + a_tag.get('href')
 
 # 休校情報
 

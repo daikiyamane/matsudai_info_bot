@@ -41,17 +41,25 @@ def retweet_favorite():
                 print("すでにいいねしてます")
 
 
-def get_url(url):
+def get_url(url, status):
     res = requests.get(url)
     soup = BeautifulSoup(res.text, 'html.parser')
     a_tag = soup.find('a')
-    return "https://mobile.matsuyama-u.jp/mbl/" + a_tag.get('href')
+    today_url = "https://mobile.matsuyama-u.jp/mbl/" + a_tag.get('href')
+    if today_url.split('=')[-1] == datetime.date.today().strftime('%Y%m%d'):
+        return today_url
+    else:
+        if status == "cs":
+            return "https://mobile.matsuyama-u.jp/mbl/hpg021101.htm?PSS=i525o5g0i0dlpr3r21h1gh07mg&DATE={}".format(datetime.date.today().strftime('%Y%m%d'))
+        else:
+            return "https://mobile.matsuyama-u.jp/mbl/hpg021201.htm?PSS=m438tgrrg6jpv9hits12lvku90&DATE={}".format(datetime.date.today.strftime('%Y%m%d'))
 
 # 休校情報
 
 
 def closed_school():
-    url = get_url("http://mobile.matsuyama-u.jp/mbl/hpg020101.htm?SETI=1")
+    url = get_url(
+        "http://mobile.matsuyama-u.jp/mbl/hpg020101.htm?SETI=1", "cs")
     res = requests.get(url)
     if res.status_code == 404:
         api.update_status("今日の休講情報はありません")
@@ -74,8 +82,8 @@ def closed_school():
     if len(text) >= 140:
         first = text[:140]
         second = text[140:]
-        api.update_status(first)
         api.update_status(second)
+        api.update_status(first)
     else:
         api.update_status(text)
 
@@ -85,7 +93,8 @@ def closed_school():
 
 def supplementary_lecture():
 
-    url = get_url("http://mobile.matsuyama-u.jp/mbl/hpg020201.htm?SETI=1")
+    url = get_url(
+        "http://mobile.matsuyama-u.jp/mbl/hpg020201.htm?SETI=1", "sl")
     res = requests.get(url)
     if res.status_code == 404:
         api.update_status("今日の補講情報はありません")

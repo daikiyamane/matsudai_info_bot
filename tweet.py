@@ -40,12 +40,19 @@ def retweet_favorite():
             except tweepy.TweepError:
                 print("すでにいいねしてます")
 
+
+def get_url(url):
+    res = requests.get(url)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    a_tag = soup.find('a')
+    return a_tag.get('href')
+
 # 休校情報
 
 
 def closed_school():
-    url = "http://mobile.matsuyama-u.jp/mbl/hpg021101.htm?PSS=h132mjp8dm3iv02ob2c6ckbj5m&DATE="
-    res = requests.get(url+f'{datetime.datetime.now().strftime("%Y%m%d")}')
+    url = get_url("http://mobile.matsuyama-u.jp/mbl/hpg020101.htm?SETI=1")
+    res = requests.get(url)
     if res.status_code == 404:
         api.update_status("今日の休講情報はありません")
         quit()
@@ -72,12 +79,13 @@ def closed_school():
     else:
         api.update_status(text)
 
+
 # 補講情報
 
 
 def supplementary_lecture():
-    url = "http://mobile.matsuyama-u.jp/mbl/hpg021201.htm?PSS=h132mjp8dm3iv02ob2c6ckbj5m&DATE="
-    res = requests.get(url+f'{datetime.datetime.now().strftime("%Y%m%d")}')
+    url = get_url("http://mobile.matsuyama-u.jp/mbl/hpg020201.htm?SETI=1")
+    res = requests.get(url)
     if res.status_code == 404:
         api.update_status("今日の補講情報はありません")
         quit()

@@ -15,20 +15,28 @@ auth.set_access_token(
 
 api = tweepy.API(auth)
 
+# アカウントの取得
 
-def make_accounts():
+
+def get_accounts():
     accounts = ["Matsudai_koho", "MU_Career",
                 "MU_COOP", "MU_Renkei", "MU_Internation"]
     return accounts
 
+#
 
-def make_tweets(accounts, count, page):
+# 対象のツイートの取得
+
+
+def get_tweets(accounts, count, page):
     return [api.user_timeline(accounts[i], count=count, page=page) for i in range(len(accounts))]
+
+# リツイートといいね
 
 
 def retweet_favorite():
-    accounts = make_accounts()
-    tweets = make_tweets(accounts, 5, 1)
+    accounts = get_accounts()
+    tweets = get_tweets(accounts, 5, 1)
     for tweet in tweets:
         for t in tweet:
             try:
@@ -39,6 +47,8 @@ def retweet_favorite():
                 api.create_favorite(t.id)
             except tweepy.TweepError:
                 print("すでにいいねしてます")
+
+# urlの取得
 
 
 def get_url(url, status):
@@ -127,5 +137,7 @@ retweet_favorite()
 if datetime.time(6, 00) <= datetime.datetime.now().time() and datetime.datetime.now().time() <= datetime.time(7, 0):
     closed_school()
     supplementary_lecture()
-closed_school()
-supplementary_lecture()
+
+# デバッグ用
+# closed_school()
+# supplementary_lecture()

@@ -1,4 +1,4 @@
-#coding; utf-8
+# coding; utf-8
 
 import os
 import tweepy
@@ -85,14 +85,8 @@ def closed_school():
 
 def supplementary_lecture():
 
-
-<< << << < HEAD
    url = get_url("http://mobile.matsuyama-u.jp/mbl/hpg020201.htm?SETI=1")
-    res = requests.get(url)
-== == == =
-   url = "http://mobile.matsuyama-u.jp/mbl/hpg021201.htm?PSS=2aobemkn392lmin4ovuio8v2ao&DATE="
-    res = requests.get(url+f'{datetime.datetime.now().strftime("%Y%m%d")}')
->>>>>> > def87438abd5a4e309f663680b3f626d5c1f7129
+   res = requests.get(url)
    if res.status_code == 404:
         api.update_status("今日の補講情報はありません")
         quit()

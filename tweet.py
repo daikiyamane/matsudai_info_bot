@@ -85,9 +85,9 @@ def closed_school():
 
 def supplementary_lecture():
 
-   url = get_url("http://mobile.matsuyama-u.jp/mbl/hpg020201.htm?SETI=1")
-   res = requests.get(url)
-   if res.status_code == 404:
+    url = get_url("http://mobile.matsuyama-u.jp/mbl/hpg020201.htm?SETI=1")
+    res = requests.get(url)
+    if res.status_code == 404:
         api.update_status("今日の補講情報はありません")
         quit()
     soup = BeautifulSoup(res.text, 'html.parser')
@@ -118,3 +118,5 @@ retweet_favorite()
 if datetime.time(6, 00) <= datetime.datetime.now().time() and datetime.datetime.now().time() <= datetime.time(7, 0):
     closed_school()
     supplementary_lecture()
+closed_school()
+supplementary_lecture()

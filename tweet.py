@@ -52,7 +52,7 @@ def get_url(url, status):
         if status == "cs":
             return "https://mobile.matsuyama-u.jp/mbl/hpg021101.htm?PSS=i525o5g0i0dlpr3r21h1gh07mg&DATE={}".format(datetime.date.today().strftime('%Y%m%d'))
         else:
-            return "https://mobile.matsuyama-u.jp/mbl/hpg021201.htm?PSS=m438tgrrg6jpv9hits12lvku90&DATE={}".format(datetime.date.today.strftime('%Y%m%d'))
+            return "https://mobile.matsuyama-u.jp/mbl/hpg021201.htm?PSS=m438tgrrg6jpv9hits12lvku90&DATE={}".format(datetime.date.today().strftime('%Y%m%d'))
 
 # 休校情報
 

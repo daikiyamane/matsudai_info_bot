@@ -139,5 +139,5 @@ if datetime.time(7, 00) <= datetime.datetime.now().time() and datetime.datetime.
     supplementary_lecture()
 
 # デバッグ用
-closed_school()
-supplementary_lecture()
+#closed_school()
+#supplementary_lecture()

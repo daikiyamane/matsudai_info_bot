@@ -57,7 +57,7 @@ def get_url(url, status):
     a_tag = soup.find('a')
     today_url = "https://mobile.matsuyama-u.jp/mbl/" + a_tag.get('href')
     if today_url.split('=')[-1] == datetime.date.today().strftime('%Y%m%d'):
-        print("date ok!")
+        print("date ok!!")
         return today_url
     else:
         if status == "cs":

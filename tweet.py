@@ -127,8 +127,8 @@ def supplementary_lecture():
     if len(text) >= 140:
         first = text[:140]
         second = text[140:]
-        api.update_status(first)
         api.update_status(second)
+        api.update_status(first)
     else:
         api.update_status(text)
 

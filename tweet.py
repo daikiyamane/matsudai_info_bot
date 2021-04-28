@@ -134,10 +134,10 @@ def supplementary_lecture():
 
 
 retweet_favorite()
-if datetime.time(6, 00) <= datetime.datetime.now().time() and datetime.datetime.now().time() <= datetime.time(7, 0):
+if datetime.time(7, 00) <= datetime.datetime.now().time() and datetime.datetime.now().time() <= datetime.time(8, 00):
     closed_school()
     supplementary_lecture()
 
 # デバッグ用
-# closed_school()
-# supplementary_lecture()
+closed_school()
+supplementary_lecture()

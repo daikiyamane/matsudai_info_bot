@@ -7,6 +7,6 @@ Account -> [@matsudai_p](https://twitter.com/matsudai_p)
 
 ## なぜ作ったのか
 - 松山大学の公式アカウントが５つほどあり右往左往しないといけなかったため
-- [@KOHOUSAGI](https://twitter.com/KOHOUSAGI)さんが同じようなことを昔からずっとやっているので少しでも楽になってくれればいいなと考えた
+- [@KOHOUSAGI](https://twitter.com/KOHOUSAGI)さんが毎日手動で休校情報や補講情報を投稿しているので少しでも楽になってくれればいいなと考えた
 
 

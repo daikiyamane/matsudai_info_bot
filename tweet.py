@@ -62,6 +62,8 @@ def get_url(url, status):
     else:
         if status == "cs":
             return "https://mobile.matsuyama-u.jp/mbl/hpg021101.htm?PSS=i525o5g0i0dlpr3r21h1gh07mg&DATE={}".format(datetime.date.today().strftime('%Y%m%d'))
+        elif status == "cc":
+            return "https://mobile.matsuyama-u.jp/mbl/hpg021301.htm?PSS=ecoinkvvhkqoa3tu3idb71i12o&DATE={}".format(datetime.date.today().strftime('%Y%m%d'))
         else:
             return "https://mobile.matsuyama-u.jp/mbl/hpg021201.htm?PSS=m438tgrrg6jpv9hits12lvku90&DATE={}".format(datetime.date.today().strftime('%Y%m%d'))
 
@@ -133,12 +135,48 @@ def supplementary_lecture():
     else:
         api.update_status(text)
 
+# 教室変更
+
+
+def classroom_change():
+
+    url = get_url(
+        "http://mobile.matsuyama-u.jp/mbl/hpg020301.htm?SETI=1", "cc")
+    res = requests.get(url)
+    if res.status_code == 404:
+        api.update_status("今日の教室変更はありません")
+        quit()
+    soup = BeautifulSoup(res.text, 'html.parser')
+
+    print(soup.prettify())
+
+    for script in soup(["script", "style", "title", "a"]):
+        script.decompose()
+    print(soup)
+
+    text = soup.get_text()
+
+    lines = [line.strip() for line in text.splitlines()]
+    print(lines)
+
+    text = "\n".join(line for line in lines if line)
+    print(text)
+    if len(text) >= 140:
+        first = text[:140]
+        second = text[140:]
+        api.update_status(second)
+        api.update_status(first)
+    else:
+        api.update_status(text)
+
 
 retweet_favorite()
 if datetime.time(7, 00) <= datetime.datetime.now().time() and datetime.datetime.now().time() <= datetime.time(8, 00):
     closed_school()
     supplementary_lecture()
+    classroom_change()
 
 # デバッグ用
-#closed_school()
-#supplementary_lecture()
+closed_school()
+supplementary_lecture()
+classroom_change()

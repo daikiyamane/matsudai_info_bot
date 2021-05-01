@@ -177,6 +177,6 @@ if datetime.time(7, 00) <= datetime.datetime.now().time() and datetime.datetime.
     classroom_change()
 
 # デバッグ用
-closed_school()
-supplementary_lecture()
-classroom_change()
+# closed_school()
+# supplementary_lecture()
+# classroom_change()

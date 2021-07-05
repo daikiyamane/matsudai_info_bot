@@ -20,7 +20,7 @@ api = tweepy.API(auth)
 
 def get_accounts():
     accounts = ["Matsudai_koho", "MU_Career",
-                "MU_COOP", "MU_Renkei", "MU_Internation"]
+                "MU_COOP", "MU_Renkei", "MU_Internation", "Koho_chan_"]
     return accounts
 
 #
